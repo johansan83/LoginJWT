@@ -1,6 +1,20 @@
 @LoginJWT_HostAddress = http://localhost:5012
 
-GET {{LoginJWT_HostAddress}}/weatherforecast/
+GET {{LoginJWT_HostAddress}}/
 Accept: application/json
 
 ###
+### Iniciar sesión
+POST {{LoginJWT_HostAddress}}/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "johansan@gmail.com",
+  "password": "Clave1234*"
+}
+
+### Usar token para acceder a endpoint protegido
+# Copia el valor de "token" de la respuesta anterior
+GET {{LoginJWT_HostAddress}}/api/profile
+Authorization: Bearer {{token}}
+Accept: application/json
